@@ -1,15 +1,19 @@
-name: Bonjour
+name: Vehicle Server CI
 on:
   - push
 jobs:
-  dire_bonjour:
+  ci:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
-      - uses: juliangruber/read-file-action@v1
-        id: readfile
+      - name: Checkout Code
+        uses: actions/checkout@v5
+      - name: Setup Node
+      - uses: actions/setup-node@v6
         with:
-          path: ./README.md
-      - uses: Code-Hex/neo-cowsay-action@v1
-        with:
-          message: ${{ steps.readfile.outputs.content }}
+          node-version: '22.x'
+      - name: Check Node Version
+        run: node --version
+      - name: Build application
+        run: npm run build
+      - name: List dist output
+        run: ls dist/
