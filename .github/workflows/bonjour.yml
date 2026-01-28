@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: '22.x'
       - name: Check Node Version
-        run: node --version
+        run: node -v
       - name: Build application
         run: npm run build
       - name: List dist output
