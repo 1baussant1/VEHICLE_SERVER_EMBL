@@ -3,10 +3,13 @@ import { AppError, ErrorCode } from '../errors';
 import { Request, Response } from 'express';
 
 interface CreateVehiclePayload {
+  // Position au lieu d'un param latitude et longitude séparé 
   shortcode: string;
   battery: number;
-  latitude: number;
-  longitude: number;
+  position: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 export class CreateVehicleController {
@@ -26,8 +29,8 @@ export class CreateVehicleController {
       shortcode: req.body.shortcode,
       battery: req.body.battery,
       position: {
-        latitude: req.body.longitude,
-        longitude: req.body.latitude,
+        latitude: req.body.position.latitude, // MAJ
+        longitude: req.body.position.longitude, //MAJ
       },
     });
 
@@ -38,7 +41,7 @@ export class CreateVehicleController {
 function validateRequestPayload(req: CreateVehiclePayload): string[] {
   const violations :string[] = []
 
-  if (req.shortcode.length != 6) {
+  if (!req.shortcode || req.shortcode.length !== 4) {
     violations.push("Shortcode must be only 4 characters long");
   }
 
@@ -46,12 +49,18 @@ function validateRequestPayload(req: CreateVehiclePayload): string[] {
     violations.push("Battery level must be between 0 and 100");
   }
 
-  if (req.longitude < -90 || req.longitude > 90) {
-    violations.push("Longitude must be between -90 and 90");
-  }
+  // Verification de la position, structure du code légèrement modifiée pour passer les tests.
+  if (!req.position) {
+    violations.push("Position is required");
+  } else {
+    const { latitude, longitude } = req.position;
 
-  if (req.latitude < -90 || req.latitude > 90) {
-    violations.push("Latitude must be between -90 and 90");
+    if (latitude < -90 || latitude > 90) {
+      violations.push("Latitude must be between -90 and 90");
+    }
+    if (longitude < -180 || longitude > 180) {
+      violations.push("Longitude must be between -180 and 180");
+    }
   }
 
   return violations;
