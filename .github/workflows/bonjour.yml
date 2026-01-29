@@ -1,14 +1,22 @@
-name: Intégration continue
-on: [push, pull_request]
+name: Vehicle Server CI
+on:
+  - push
+  - pull_request
 jobs:
-  continuous:
+  ci:
     runs-on: ubuntu-24.04
     steps:
-      - name: "Récupération fichiers"  
+      - name: Checkout Code
         uses: actions/checkout@v5
-
+      - name: Setup Node
       - uses: actions/setup-node@v6
         with:
-          node-version: 22
-      - run: npm ci 
-      - run: npm run build
+          node-version: '22.x'
+      - name: Check Node Version
+        run: node --version
+      - name: Build application
+        run: npm run build
+      - name: Run Lint
+        run: npm run lint
+      - name: List dist output
+        run: ls dist/
