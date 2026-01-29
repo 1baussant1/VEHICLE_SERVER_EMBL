@@ -9,7 +9,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v5
       - name: Setup Node
-      - uses: actions/setup-node@v6
+        uses: actions/setup-node@v6
         with:
           node-version: '22.x'
       - name: Check Node Version
