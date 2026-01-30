@@ -11,7 +11,14 @@ First start a database server
 
 ```bash
 docker run -d -e POSTGRES_USER=vehicle -e POSTGRES_PASSWORD=vehicle -e POSTGRES_DB=vehicle -p 5432:5432 postgis/postgis:16-3.4-alpine
+
 ```
+
+If issues with port, try this command
+```bash
+sudo systemctl stop postgresql
+```
+
 
 Then, in another terminal start the server
 
@@ -24,7 +31,7 @@ node dist/index.js
 #### Create a Vehicle
 
 ```bash
-curl -v -XPOST -H "Content-Type: application/json" --data '{"shortcode":"abbc", "battery": 12, "latitude": 53.43, "longitude": 43.43}' localhost:8080/vehicles | jq .
+curl -v -H "Content-Type: application/json" --data '{"shortcode": "abac", "battery": 17, "position": { "latitude": 55.43, "longitude": 47.43}}' localhost:8080/vehicles | jq .
 ```
 
 #### List all Vehicles
