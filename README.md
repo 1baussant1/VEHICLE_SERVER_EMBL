@@ -1,34 +1,46 @@
 ## Vehicle Server Typescript
 
-### Requirements
+## Requirements
 
 - nodejs
 - docker
+- oclif
+- typescript
 
-### Running the server
+### Pre-requiste 1 - Installation of dependecies
+```bash
+npm install
+```
 
+### Pre-requiste 2 - Build Project
+```bash
+npm build
+```
+
+### Get authors
+```bash
+npm run hello-test
+```
+
+### Running the vehicle-server
 First start a database server
 
 ```bash
-docker run -d -e POSTGRES_USER=vehicle -e POSTGRES_PASSWORD=vehicle -e POSTGRES_DB=vehicle -p 5432:5432 postgis/postgis:16-3.4-alpine
-
+npm run start-db
 ```
 
 If issues with port, try this command
 ```bash
 sudo systemctl stop postgresql
 ```
-
-
-Then, in another terminal start the server
-
+Then,
 ```bash
-node dist/index.js
+npm run start
 ```
 
-### Test plan
+## Test plan
 
-#### Create a Vehicle
+#### Create a Vehicle 
 
 ```bash
 curl -v -H "Content-Type: application/json" --data '{"shortcode": "abcd", "battery": 17, "position": { "latitude": 55.43, "longitude": 47.43}}' localhost:8080/vehicles | jq .
