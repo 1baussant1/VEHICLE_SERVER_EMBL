@@ -3,7 +3,7 @@ on:
   - push
   - pull_request
 jobs:
-  Verification CI vehicle Server:
+  verification-ci-vehicle-server:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout Code
