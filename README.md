@@ -1,7 +1,9 @@
-## Vehicle Server Typescript
+# Vehicle Server Typescript
+
+## Current functionning Tag
+v0.3.0
 
 ## Requirements
-
 - nodejs
 - docker
 - oclif
@@ -9,7 +11,7 @@
 
 ### Pre-requiste 1 - Installation of dependecies
 ```bash
-npm install
+npm install 
 ```
 
 ### Pre-requiste 2 - Build Project
@@ -17,14 +19,8 @@ npm install
 npm build
 ```
 
-### Get authors
-```bash
-npm run hello-test
-```
-
-### Running the vehicle-server
+## Running the vehicle-server
 First start a database server
-
 ```bash
 npm run start-db
 ```
@@ -33,17 +29,22 @@ If issues with port, try this command
 ```bash
 sudo systemctl stop postgresql
 ```
-Then,
+
+Then start server,
 ```bash
 npm run start
 ```
 
-## Test plan
 
-#### Create a Vehicle 
-
+## Create a Vehicle 
+In another terminal,
 ```bash
-curl -v -H "Content-Type: application/json" --data '{"shortcode": "abcd", "battery": 17, "position": { "latitude": 55.43, "longitude": 47.43}}' localhost:8080/vehicles | jq .
+vehcile-cli create-vehicle --address=localhost:8080 --shortcode={max 4 characters} --battery={int} --latitude={float} --longitude={float}
+```
+
+if issues with vehicle-cli, try
+```bash
+npm run create-vehicle -- --address=localhost:8080 --shortcode={within 4 characters} --battery={int} --latitude={float} --longitude{float}
 ```
 
 #### List all Vehicles

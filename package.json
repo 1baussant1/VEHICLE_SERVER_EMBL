@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "description": "vehicle",
   "main": "index.js",
+  "bin": {
+    "vehicle-cli": "./dist/cli.js"
+  },
+  "oclif": {
+    "commands": "./dist/commands",
+    "bin": "vehicle-cli"
+  },
+
   "scripts": {
     "test": "jest",
     "build": "rm -rf ./dist && tsc",
@@ -10,7 +18,8 @@
     "start-db": "docker container run -d --name vehicle-database -e POSTGRES_USER=vehicle -e POSTGRES_PASSWORD=vehicle -e POSTGRES_DB=vehicle -p 5432:5432 postgis/postgis:16-3.4-alpine",
     "stop-db": "docker container rm -f vehicle-database",
     "lint": "eslint ./src",
-    "hello-test": "npm run build && node dist/hello.js"
+    "hello-test": "npm run build && node dist/hello.js",
+    "create-vehicle": "npm run build && node dist/cli.js create-vehicle"
 
   },
   "author": "",
