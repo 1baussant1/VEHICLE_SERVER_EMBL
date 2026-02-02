@@ -1,17 +1,28 @@
-## Vehicle Server Typescript
+# Vehicle Server Typescript
 
-### Requirements
+## Current functionning Tag
+v0.3.0
 
+## Requirements
 - nodejs
 - docker
+- oclif
+- typescript
 
-### Running the server
-
-First start a database server
-
+### Pre-requiste 1 - Installation of dependecies
 ```bash
-docker run -d -e POSTGRES_USER=vehicle -e POSTGRES_PASSWORD=vehicle -e POSTGRES_DB=vehicle -p 5432:5432 postgis/postgis:16-3.4-alpine
+npm install -g
+```
 
+### Pre-requiste 2 - Build Project
+```bash
+npm run build
+```
+
+## Running the vehicle-server
+First start a database server
+```bash
+npm run start-db
 ```
 
 If issues with port, try this command
@@ -19,25 +30,31 @@ If issues with port, try this command
 sudo systemctl stop postgresql
 ```
 
-
-Then, in another terminal start the server
-
+Then start server,
 ```bash
-node dist/index.js
+npm run start
 ```
 
-### Test plan
 
-#### Create a Vehicle
-
+## Create a Vehicle 
+In another terminal,
 ```bash
-curl -v -H "Content-Type: application/json" --data '{"shortcode": "abcd", "battery": 17, "position": { "latitude": 55.43, "longitude": 47.43}}' localhost:8080/vehicles | jq .
+vehicle-cli create-vehicle --address=localhost:8080 --shortcode={max 4 characters} --battery={int} --latitude={float} --longitude={float}
+```
+
+if issues with vehicle-cli, try
+```bash
+npm run create-vehicle -- --address=localhost:8080 --shortcode={within 4 characters} --battery={int} --latitude={float} --longitude{float}
 ```
 
 #### List all Vehicles
 
 ```bash
-curl -v localhost:8080/vehicles
+vehicle-cli list-vehicle --address=localhost:8080
+```
+if issues with vehicle-cli, try
+```bash
+npm run list-vehicle -- --address=localhost:8080
 ```
 
 #### Delete a Vehicle
