@@ -19,7 +19,8 @@
     "stop-db": "docker container rm -f vehicle-database",
     "lint": "eslint ./src",
     "hello-test": "npm run build && node dist/hello.js",
-    "create-vehicle": "npm run build && node dist/cli.js create-vehicle"
+    "create-vehicle": "npm run build && node dist/cli.js create-vehicle",
+    "list-vehicle": "npm rum build && node dist/cli.js list-vehicle"
 
   },
   "author": "",

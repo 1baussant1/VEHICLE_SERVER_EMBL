@@ -11,12 +11,12 @@ v0.3.0
 
 ### Pre-requiste 1 - Installation of dependecies
 ```bash
-npm install 
+npm install -g
 ```
 
 ### Pre-requiste 2 - Build Project
 ```bash
-npm build
+npm run build
 ```
 
 ## Running the vehicle-server
@@ -39,7 +39,7 @@ npm run start
 ## Create a Vehicle 
 In another terminal,
 ```bash
-vehcile-cli create-vehicle --address=localhost:8080 --shortcode={max 4 characters} --battery={int} --latitude={float} --longitude={float}
+vehicle-cli create-vehicle --address=localhost:8080 --shortcode={max 4 characters} --battery={int} --latitude={float} --longitude={float}
 ```
 
 if issues with vehicle-cli, try
@@ -50,7 +50,11 @@ npm run create-vehicle -- --address=localhost:8080 --shortcode={within 4 charact
 #### List all Vehicles
 
 ```bash
-curl -v localhost:8080/vehicles
+vehicle-cli list-vehicle --address=localhost:8080
+```
+if issues with vehicle-cli, try
+```bash
+npm run list-vehicle -- --address=localhost:8080
 ```
 
 #### Delete a Vehicle
