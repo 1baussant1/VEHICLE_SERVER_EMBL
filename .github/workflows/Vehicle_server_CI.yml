@@ -25,3 +25,6 @@ jobs:
       
       - name: Run Lint
         run: npm run lint
+
+      - name: Test CLI
+        run: npm run build && node dist/cli.js --help
